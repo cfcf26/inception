@@ -1,0 +1,27 @@
+# Use Alpine
+FROM alpine:3.14
+
+# Install nginx
+RUN apk add --no-cache nginx
+
+# Copy configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Use TLSv1.2 and TLSv1.3
+RUN sed -i 's/ssl_protocols TLSv1 TLSv1.1 TLSv1.2;/ssl_protocols TLSv1.2 TLSv1.3;/' /etc/nginx/nginx.conf
+
+# Copy SSL certificates (Replace these lines with your actual certificate paths)
+COPY nginx.crt /etc/nginx/ssl/nginx.crt
+COPY nginx.key /etc/nginx/ssl/nginx.key
+RUN mkdir -p /etc/nginx/ssl
+
+# Expose ports
+EXPOSE 80 443
+
+# # Start nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+# 환경변수를 적용하기 위한 새로운 CMD 명령어
+# CMD /bin/sh -c "envsubst '\$DOMAIN_NAME' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+
+

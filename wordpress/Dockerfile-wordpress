@@ -1,0 +1,32 @@
+# Alpine Linux를 기반으로 하는 WordPress 이미지
+FROM alpine:3.14
+
+# 필요한 패키지 설치
+RUN apk add --no-cache curl php7 php7-fpm php7-json php7-mysqli php7-iconv php7-mbstring php7-phar mysql-client
+
+# WordPress CLI 설치
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
+
+WORKDIR /var/www/wordpress
+
+# WordPress 다운로드 및 설정
+RUN wp core download --allow-root
+
+# WordPress 초기화 스크립트 추가
+COPY init-wp.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/init-wp.sh
+
+# php-fpm 설정 변경
+RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/' /etc/php7/php-fpm.d/www.conf
+
+EXPOSE 9000
+
+#mariadb 연결을 위한 wait-for-it.sh 추가
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
+
+# PHP-FPM 실행
+CMD ["sh", "/usr/local/bin/init-wp.sh"]
