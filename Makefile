@@ -22,21 +22,21 @@ ps:
 	sudo docker-compose ps
 
 wordpress_sh:
-	docker exec -it inception_wordpress_1 sh
+	sudo docker exec -it inception_wordpress_1 sh
 
 mariadb_sh:
-	docker exec -it inception_mariadb_1 sh
+	sudo docker exec -it inception_mariadb_1 sh
 
 nginx_sh:
-	docker exec -it inception_nginx_1 sh
+	sudo docker exec -it inception_nginx_1 sh
 
 clean:
-	docker-compose down
-	docker-compose rm -f
+	sudo docker-compose down
+	sudo docker-compose rm -f
 
 fclean: clean
-	docker image prune -af
-	docker volume prune -af
+	sudo docker image prune -af
+	sudo docker volume prune -af
 
 re: fclean build up
 

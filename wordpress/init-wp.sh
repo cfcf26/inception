@@ -9,7 +9,7 @@ cd /var/www/wordpress
 wp config create --dbname="$DB" --dbuser="$USER" --dbpass="$PASS" --dbhost="$HOST" --allow-root
 
 # WordPress 설치
-wp core install --url="http://ekwak.42seoul.kr" --path="/var/www/wordpress" --title="WordPress" --admin_user="$USER" --admin_password="$PASS" --admin_email="$USER_EMAIL" --allow-root
+wp core install --url="http://ekwak.42.fr" --path="/var/www/wordpress" --title="WordPress" --admin_user="$USER" --admin_password="$PASS" --admin_email="$USER_EMAIL" --allow-root
 
 # 추가 사용자 생성
 wp user create $USER1 $USER1_EMAIL --role=editor --user_pass=$PASS1 --allow-root
