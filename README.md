@@ -36,4 +36,4 @@ Set up a small infrastructure composed of different services under specific rule
 ## Submission and peer-evaluation 
 Turn in your assignment in your Git repository. Only the work inside your repository will be evaluated during the defense. Double check the names of your folders and files to ensure they are correct.
 
-![Uploading 스크린샷 2024-03-29 오전 11.32.20.png…]()
+<img width="1082" alt="스크린샷 2024-03-29 오전 11 32 20" src="https://github.com/cfcf26/inception/assets/75878816/47f63572-bf74-47cf-9b4d-bf0ec41f3e53">
